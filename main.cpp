@@ -6,6 +6,13 @@
 #include <unordered_set>
 
 using namespace std;
+
+// ANSI escape codes for colors
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string RESET = "\033[0m";
+
 // Function to read a random word from a file
 string getRandomWord(const string& filePath) {
     vector<string> words;
@@ -33,6 +40,25 @@ string getRandomWord(const string& filePath) {
     } else {
         return "";
     }
+}
+
+// Modified feedback function to include colors
+void giveFeedback(const string& guess, const string& secretWord) {
+    unordered_set<char> secretLetters(secretWord.begin(), secretWord.end());
+    string feedback = "";
+
+    for (size_t i = 0; i < guess.length(); ++i) {
+        if (guess[i] == secretWord[i]) {
+            feedback += GREEN + guess[i] + RESET; // Correctly placed letter
+        } else if (secretLetters.count(guess[i])) {
+            feedback += YELLOW + "*" + RESET; // Right letter, wrong position
+        } else {
+            feedback += RED + "_" + RESET; // Wrong letter
+        }
+    }
+
+    cout << "Feedback: " << feedback << endl;
+    cout << "Incorrect, try again." << endl;
 }
 
 // Function to start the guessing game
@@ -64,23 +90,22 @@ void startGame(const string& mode) {
         }
         //check for exact match
         if (guess == secretWord) {
-            cout << "Congratulations! You've guessed correctly." << endl;
+            cout << "\033[33m";
+            cout << "Correct" << endl;
+            cout << R"(
+_____.___.                      .__         ._.
+\__  |   | ____  __ __  __  _  _|__| ____   | |
+ /   |   |/  _ \|  |  \ \ \/ \/ /  |/    \  | |
+ \____   (  <_> )  |  /  \     /|  |   |  \  \|
+ / ______|\____/|____/    \/\_/ |__|___|  /  __
+ \/                                     \/   \/)" << endl;
+            // Reset the text color to default
+            cout << "\033[0m";
+
             break;
         } 
-        // Matching and contained letters
-        string feedback = "";
-        unordered_set<char> secretLetters(secretWord.begin(), secretWord.end());
-        for (size_t i = 0; i < guess.length(); ++i) {
-            if (guess[i] == secretWord[i]) {
-                feedback += guess[i]; // Correctly placed letter
-            } else if (secretLetters.count(guess[i])) {
-                feedback += "*"; // Right letter, wrong position
-            } else {
-                feedback += "_"; // Wrong letter
-            }
-        }
-        cout << "Feedback: " << feedback << endl;
-        cout << "Incorrect, try again." << endl;
+        // Provide feedback with colors
+        giveFeedback(guess, secretWord);
     }
 }
 //function to choose the game mode and start game
@@ -153,7 +178,7 @@ int main() {
 
     bool game_running = true;       // Keeps Game running
     char c;                         // Tracks user's input in main menu
-    
+
     // Change the text color to green
     cout << "\033[32m";
 
@@ -190,5 +215,5 @@ int main() {
 
     cout << "Exit Success!" << endl;
 
-  return 0;
+    return 0;
 }
