@@ -171,8 +171,40 @@ void choose_mode() {
 }
 
 void rules() {
-    cout << "Rules of game: " << endl;
+    cout << "------------------------------------------------------" << endl;
+    cout << R"(Game Rules:
+    1. You will have 6 chances to guess a random target word that is chosen with the game.
+    2. The target word will have 5 letters within it, therefore you can only make guesses 
+       with 5 letter words.
+    3. You cannot enter words scrambled with random letters such as “abcde” 
+       since it is not an actual word that exists within the game or in general.
+    4. If you guess a word that is not within the game mode, you will be given 
+       another try to guess a word.
+    5. As you make your guesses throughout the game, the system will be dropping hints in 
+       order to help you figure out what your word could be before you make your final guess. 
+       For Example:
+        a. Let's say the target word is “hatch”.
+        b. Your first guess is “mouse”. Since there are no letters in the word that 
+           match with the target word, you will receive no hints.
+        c. Your second guess is “crash”. Since you guessed the word “crash”, 
+           your hint will be that your target word will contain the letters ‘a’ and 
+           ‘c’.
+        d. Your third guess is “house”. Since you guess the word “house”, 
+           your hint will be that you found a letter that is not only in the target word, 
+           but it matches the exact location of where it was guessed, in this case being the 
+           first letter of the target word ‘h’.
+    6. Once you have made your 6 guesses, you will receive a message whether you have either 
+       guessed the word or if you haven't.
+    7. If you are able to guess the word before your 6th try, the game will end and you will 
+       receive a message that you won the game.
+    8. There are 3 different modes in this game:
+        a. Normal Mode - This mode will contain random 5-letter words in general.
+        b. Food Mode - This mode will contain 5-letter words that are related to the topic 
+           of “food”
+        c. US Cities Mode - This mode will contain 5-letter words that are names of cities 
+           located in the country, United States of America.)" << endl;
 }
+
 
 int main() {
 
