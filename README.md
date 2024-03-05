@@ -6,7 +6,7 @@ This is our mini project based on the game Wordle. This is a word guessing game 
 
 Our goal in this project was to be able to implement the 5-letter word guessing game into a Linux terminal, where you could play the game with extra features such as a menu system where you can navigate to choose a game mode, view the rules of the game, and the option to play the game again or to exit the game. We also wanted to give a visually appealing experience by adding animations to the game.
 
-## Requirments
+## Requirements
 
 - Linux
 
